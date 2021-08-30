@@ -1,6 +1,6 @@
 # Java XML external entity (XXE) injection文档
 
-## Digester XXE注入
+## Commons-Digester3 XXE注入
 
 `mvnrepository.com`最新版本更新到3.2,该组件所有版本目前都存在问题.
 
@@ -14,6 +14,70 @@
 
 ```java
 import org.apache.commons.digester3.Digester;
+
+public void badDigester(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ServletInputStream servletInputStream = request.getInputStream();
+		Digester digester = new Digester();
+		digester.parse(servletInputStream); //实际调用org.xml.sax.XMLReader解析xml数据
+}
+
+
+public void okDigester(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ServletInputStream servletInputStream = request.getInputStream();
+		Digester digester = new Digester();
+        digester.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+		digester.setFeature("http://xml.org/sax/features/external-general-entities", false);
+		digester.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+		digester.parse(servletInputStream);
+}
+```
+
+## Commons-Digester XXE注入
+
+`mvnrepository.com`最新版本更新到2.1,该组件所有版本目前都存在问题.
+
+```pom
+<dependency>
+    <groupId>commons-digester</groupId>
+    <artifactId>commons-digester</artifactId>
+    <version>2.1</version>
+</dependency>
+```
+
+```java
+import org.apache.commons.digester.Digester;
+
+public void badDigester(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ServletInputStream servletInputStream = request.getInputStream();
+		Digester digester = new Digester();
+		digester.parse(servletInputStream); //实际调用org.xml.sax.XMLReader解析xml数据
+}
+
+
+public void okDigester(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ServletInputStream servletInputStream = request.getInputStream();
+		Digester digester = new Digester();
+        digester.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+		digester.setFeature("http://xml.org/sax/features/external-general-entities", false);
+		digester.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+		digester.parse(servletInputStream);
+}
+```
+
+## Commons-Digester XXE注入
+
+`mvnrepository.com`最新版本更新到2.1,该组件所有版本目前都存在问题.
+
+```pom
+<dependency>
+    <groupId>commons-digester</groupId>
+    <artifactId>commons-digester</artifactId>
+    <version>2.1</version>
+</dependency>
+```
+
+```java
+import org.apache.commons.digester.Digester;
 
 public void badDigester(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ServletInputStream servletInputStream = request.getInputStream();
