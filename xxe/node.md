@@ -1,6 +1,20 @@
 # Java XML external entity (XXE) injection文档
 
-
+* [Commons-Digester3 XXE注入](#Commons-Digester3%20XXE注入)
+* [Commons-Digester XXE注入](#Commons-Digester%20XXE注入)
+* [Tomcat-Digester XXE注入](#Tomcat-Digester%20XXE注入)
+* [DocumentHelper XXE注入](#DocumentHelper%20XXE注入)
+* [Validator XXE注入](#Validator%20XXE注入)
+* [XMLDecoder XXE注入](#XMLDecoder%20XXE注入)
+* [DocumentBuilder XXE注入](#DocumentBuilder%20XXE注入)
+* [jdom2-SAXBuilder XXE注入](#jdom2-SAXBuilder%20XXE注入)
+* [jdom-SAXBuilder XXE注入](#jdom-SAXBuilder%20XXE注入)
+* [SAXParser XXE注入](#SAXParser%20XXE注入)
+* [SAXReader XXE注入](#SAXReader%20XXE注入)
+* [XMLReader XXE注入](#XMLReader%20XXE注入)
+* [Transformer XXE注入](#Transformer%20XXE注入)
+* [TransformerFactory XXE注入](#TransformerFactory%20XXE注入)
+* [SAXTransformerFactory XXE注入](#SAXTransformerFactory%20XXE注入)
 
 sinks:
 
@@ -127,6 +141,97 @@ Transformer:
 
 ```
 javax.xml.transform.Transformer;transform(Source xmlSource, Result outputTarget);void
+```
+
+TransformerFactory:
+
+```
+javax.xml.transform.TransformerFactory;newTransformer(Source source);Transformer
+```
+
+SAXTransformerFactory(TransformerFactory子类):
+
+```
+javax.xml.transform.sax.SAXTransformerFactory;newTransformer(Source source);Transformer
+javax.xml.transform.sax.SAXTransformerFactory;newTransformerHandler(Source src);TransformerHandler
+javax.xml.transform.sax.SAXTransformerFactory;newTransformerHandler(Templates templates);TransformerHandler
+javax.xml.transform.sax.SAXTransformerFactory;newXMLFilter(Source src);XMLFilter
+javax.xml.transform.sax.SAXTransformerFactory;newXMLFilter(Templates templates);XMLFilter
+```
+
+SchemaFactory:
+
+```
+javax.xml.validation.SchemaFactory;newSchema(Source schema);Schema
+javax.xml.validation.SchemaFactory;newSchema(File schema);Schema
+javax.xml.validation.SchemaFactory;newSchema(URL schema);Schema
+javax.xml.validation.SchemaFactory;newSchema(Source[] schemas);Schema
+```
+
+Unmarshaller:
+
+```
+javax.xml.bind.Unmarshaller;unmarshal(java.io.File f);Object
+javax.xml.bind.Unmarshaller;unmarshal(java.io.InputStream is);Object
+javax.xml.bind.Unmarshaller;unmarshal(Reader reader);Object
+javax.xml.bind.Unmarshaller;unmarshal(java.net.URL url);Object
+javax.xml.bind.Unmarshaller;unmarshal(org.xml.sax.InputSource source);Object
+javax.xml.bind.Unmarshaller;unmarshal(org.w3c.dom.Node node);Object
+javax.xml.bind.Unmarshaller;unmarshal(org.w3c.dom.Node node, Class<T> declaredType);Object
+javax.xml.bind.Unmarshaller;unmarshal(javax.xml.transform.Source source);Object
+javax.xml.bind.Unmarshaller;unmarshal(javax.xml.transform.Source source, Class<T> declaredType);Object
+javax.xml.bind.Unmarshaller;unmarshal(javax.xml.stream.XMLStreamReader reader);Object
+javax.xml.bind.Unmarshaller;unmarshal(javax.xml.stream.XMLStreamReader reader, Class<T> declaredType);Object
+javax.xml.bind.Unmarshaller;unmarshal(javax.xml.stream.XMLEventReader reader);Object
+javax.xml.bind.Unmarshaller;unmarshal(javax.xml.stream.XMLEventReader reader, Class<T> declaredType);Object
+```
+
+XPathExpression:
+
+```
+javax.xml.xpath.XPathExpression;evaluate(InputSource source, QName returnType);Object
+javax.xml.xpath.XPathExpression;evaluate(InputSource source);String
+```
+
+Persister:
+
+```
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, String source);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, File source);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, InputStream source);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, Reader source);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, InputNode source);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, String source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, File source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, InputStream source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, Reader source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, InputNode node, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, InputNode node, Session session);<T> T
+org.simpleframework.xml.core.Persister;read(Class<? extends T> type, InputNode node, Context context);<T> T
+org.simpleframework.xml.core.Persister;read(T value, String source);<T> T
+org.simpleframework.xml.core.Persister;read(T value, File source);<T> T
+org.simpleframework.xml.core.Persister;read(T value, InputStream source);<T> T
+org.simpleframework.xml.core.Persister;read(T value, Reader source);<T> T
+org.simpleframework.xml.core.Persister;read(T value, InputNode source);<T> T
+org.simpleframework.xml.core.Persister;read(T value, String source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(T value, File source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(T value, InputStream source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(T value, Reader source, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(T value, InputNode node, boolean strict);<T> T
+org.simpleframework.xml.core.Persister;read(T value, InputNode node, Session session);<T> T
+org.simpleframework.xml.core.Persister;read(T value, InputNode node, Context context);<T> T
+org.simpleframework.xml.core.Persister;validate(Class type, String source);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, File source);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, InputStream source);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, Reader source);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, InputNode source);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, String source, boolean strict);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, File source, boolean strict);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, InputStream source, boolean strict);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, Reader source, boolean strict);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, InputNode node, boolean strict);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, InputNode node, Session session);boolean
+org.simpleframework.xml.core.Persister;validate(Class type, InputNode node, Context context);boolean
 ```
 
 
@@ -446,5 +551,193 @@ public void okTransformer(HttpServletRequest request) throws Exception {
 	tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
 	StreamSource source = new StreamSource(servletInputStream);
 	tf.newTransformer().transform(source, new DOMResult());
+}
+```
+
+## TransformerFactory XXE注入
+
+```java
+import javax.xml.transform.TransformerFactory;
+
+public void badTransformerFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	//实际创建com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl对象
+	TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	transformerFactory.newTransformer(new StreamSource(servletInputStream));
+}
+
+public void okTransformerFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+	transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+	transformerFactory.newTransformer(new StreamSource(servletInputStream));
+}
+```
+
+## SAXTransformerFactory XXE注入
+
+```java
+import javax.xml.transform.sax.SAXTransformerFactory;
+
+public void bad1SAXTransformerFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	//实际创建com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl对象
+	SAXTransformerFactory sf = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
+	StreamSource source = new StreamSource(servletInputStream);
+	sf.newTransformerHandler(source);
+}
+
+public void bad2SAXTransformerFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	//实际创建com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl对象
+	SAXTransformerFactory sf = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
+	StreamSource source = new StreamSource(servletInputStream);
+	sf.newTransformer(source);
+}
+
+public void bad3SAXTransformerFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	//实际创建com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl对象
+	SAXTransformerFactory sf = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
+	StreamSource source = new StreamSource(servletInputStream);
+	sf.newXMLFilter(source);
+}
+
+public void okSAXTransformerFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	SAXTransformerFactory sf = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
+	sf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+	sf.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+	StreamSource source = new StreamSource(servletInputStream);
+	sf.newTransformerHandler(source);
+}
+```
+
+
+## SchemaFactory XXE注入
+
+```java
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+
+public void badSchemaFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	//实际创建com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory对象
+	SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+	StreamSource source = new StreamSource(servletInputStream);
+	Schema schema = factory.newSchema(source);
+}
+
+public void okSchemaFactory(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+	factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+	factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+	StreamSource source = new StreamSource(servletInputStream);
+	Schema schema = factory.newSchema(source);
+}
+```
+
+## Unmarshaller XXE注入
+
+Unmarshaller在jdk 1.8后修复了xxe注入
+
+```java
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+
+public void badXPathExpression(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	JAXBContext jaxbContext = JAXBContext.newInstance(Test.class);
+	Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+	unmarshaller.unmarshal(servletInputStream);
+}
+
+
+Test.java
+
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="name")
+public class Test implements Serializable {
+
+	private Integer id;
+
+	private String name;
+
+	private String pass;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	@Override
+	public String toString() {
+		return "Test{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", pass='" + pass + '\'' +
+				'}';
+	}
+}
+
+```
+
+## XPathExpression XXE注入
+
+调用Document.parse(...)解析
+
+```java
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
+public void badXPathExpression(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	XPath xPath = XPathFactory.newInstance().newXPath();
+	XPathExpression xPathExpression = xPath.compile("xxe");
+	xPathExpression.evaluate(new InputSource(servletInputStream));
+}
+```
+
+## Persister XXE注入
+
+```pom
+<dependency>
+  <groupId>org.simpleframework</groupId>
+  <artifactId>simple-xml</artifactId>
+  <version>2.7.1</version>
+</dependency>
+```
+
+```java
+import org.simpleframework.xml.core.Persister;
+
+public void badPersister(HttpServletRequest request) throws Exception {
+	ServletInputStream servletInputStream = request.getInputStream();
+	Persister persister = new Persister();
+	persister.read("", servletInputStream);
 }
 ```
