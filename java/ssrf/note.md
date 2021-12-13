@@ -1,6 +1,6 @@
 # Java SSRF跨站请求伪造文档
 
-* [java-net ssrf](#java-net ssrf)
+* [java-net ssrf](#java-net-ssrf)
 
 格式：namespace;type;subtypes;names;signature;ext;input;additionalTaintStep;additionalTaintStepInput;additionalTaintStep1;additionalTaintStepInput1...
 
