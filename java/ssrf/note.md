@@ -29,17 +29,17 @@ java.net;URLClassLoader;false;[loadClass, getResourceAsStream, findResource, get
 import java.net.URL;
 
 public void badJavaNetURLSSRF(HttpServletRequest request) throws Exception {
-		String requestUrl = request.getParameter("url");
-		URL xxx = new URL(requestUrl);
-		xxx.openConnection();  //bad
-		xxx.openStream();  //bad
+	String requestUrl = request.getParameter("url");
+	URL xxx = new URL(requestUrl);
+	xxx.openConnection();  //bad
+	xxx.openStream();  //bad
 }
 
 public void badJavaNetURLClassLoaderSSRF(HttpServletRequest request) throws Exception {
-		String requestUrl = request.getParameter("url");
-		URL[] urls = new URL[]{xxx};
-		URLClassLoader urlClassLoader = URLClassLoader.newInstance(urls);
-    urlClassLoader.findResource("test");  //bad
-    urlClassLoader.loadClass("aaa");  //bad
+	String requestUrl = request.getParameter("url");
+	URL[] urls = new URL[]{xxx};
+	URLClassLoader urlClassLoader = URLClassLoader.newInstance(urls);
+	urlClassLoader.findResource("test");  //bad
+	urlClassLoader.loadClass("aaa");  //bad
 }
 ```
