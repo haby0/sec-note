@@ -25,6 +25,10 @@ java.net;URLClassLoader;false;[loadClass, getResourceAsStream, findResource, get
 
 ## Java net ssrf
 
+java.net.URL 支持的协议：file、ftp、http、https、jar、mailto、netdoc
+
+
+
 ```java
 import java.net.URL;
 
