@@ -3,6 +3,8 @@
 * [java-net ssrf](#java-net-ssrf)
 * [springframework ssrf](#springframework-ssrf)
 
+## 1 sinks:
+
 格式：namespace;type;subtypes;names;signature;ext;input;additionalTaintStep;additionalTaintStepInput;additionalTaintStep1;additionalTaintStepInput1...
 
 
@@ -13,9 +15,7 @@ input：触发漏洞方法名的形参位置
 additionalTaintStep：依赖的污点
 
 
-sinks:
-
-java-net:
+### 1.1 java-net:
 
 ```java
 java.net;URL;false;[openConnection, openStream];;;Argument[-1];java.net.URL(String);Argument[0]
@@ -35,7 +35,7 @@ java.net.http;HttpRequest.Builder;false;[uri];;;Argument[0];java.net.URI.create(
 ```
 java.net.URI.create(String);Argument[0] 应该做为一个全局污点
 
-springframework:
+### 1.2 springframework:
 
 org.springframework.web.client.RestTemplate 属于 spring-web模块
 ```java
@@ -45,7 +45,10 @@ org.springframework.web.client;RestTemplate;false;[exchange];;;Argument[0];org.s
 ```
 
 
-## Java net ssrf
+
+## 2 示例
+
+### Java net ssrf
 
 java.net.URL 支持的协议：file、ftp、http、https、jar、mailto、netdoc
 
@@ -82,7 +85,7 @@ public void badJavaNetHttpRequestSSRF(HttpServletRequest request) throws Excepti
 }
 ```
 
-## springframework ssrf
+### springframework ssrf
 
 
 ```java
